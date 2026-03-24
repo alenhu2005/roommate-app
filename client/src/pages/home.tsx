@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
+import { BottomNav } from "@/components/bottom-nav";
 import type { Record } from "@shared/schema";
 
 const formSchema = z.object({
@@ -136,7 +137,7 @@ export default function Home() {
   const splitModeVal = form.watch("splitMode");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-0">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="max-w-xl mx-auto px-4 h-14 flex items-center gap-3">
@@ -153,7 +154,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-6 space-y-5">
+      <main className="max-w-xl mx-auto px-4 py-6 pb-24 space-y-5">
         {/* Balance Card */}
         <BalanceCard balance={balance} isLoading={isLoading} recordCount={records.length} />
 
@@ -335,6 +336,8 @@ export default function Home() {
           )}
         </div>
       </main>
+
+      <BottomNav />
     </div>
   );
 }

@@ -32,3 +32,37 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
+// Trip types (in-memory only, no DB table needed)
+export type Trip = {
+  id: string;
+  name: string;
+  members: string[];
+  createdAt: string;
+};
+
+export type InsertTrip = {
+  name: string;
+  members: string[];
+};
+
+export type TripExpense = {
+  id: string;
+  tripId: string;
+  item: string;
+  amount: number;
+  paidBy: string;
+  splitAmong: string[];
+  date: string;
+  createdAt: string;
+};
+
+export type InsertTripExpense = {
+  id?: string;
+  tripId: string;
+  item: string;
+  amount: number;
+  paidBy: string;
+  splitAmong: string[];
+  date: string;
+};
