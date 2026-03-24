@@ -145,7 +145,7 @@ export default function Home() {
             <HomeIcon className="w-4 h-4 text-primary-foreground" />
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="text-base font-semibold tracking-tight truncate">室友記帳本</h1>
+            <h1 className="text-base font-semibold tracking-tight truncate">記帳本</h1>
           </div>
           <div className="flex items-center gap-1.5">
             <Users className="w-3.5 h-3.5 text-muted-foreground" />
