@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
-import { zhTW } from "date-fns/locale";
 import {
   Home as HomeIcon,
   Plus,
@@ -41,7 +40,6 @@ import { useToast } from "@/hooks/use-toast";
 import type { Record } from "@shared/schema";
 
 const formSchema = z.object({
-  date: z.string().min(1, "請選擇日期"),
   item: z.string().min(1, "請填寫消費項目"),
   amount: z.coerce.number().positive("金額必須大於 0"),
   paidBy: z.enum(["胡", "詹"]),
@@ -84,12 +82,9 @@ export default function Home() {
   const { toast } = useToast();
   const [showForm, setShowForm] = useState(true);
 
-  const today = format(new Date(), "yyyy-MM-dd");
-
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: today,
       item: "",
       amount: undefined as any,
       paidBy: "胡",
@@ -105,11 +100,12 @@ export default function Home() {
     mutationFn: (values: FormValues) =>
       apiRequest("POST", "/api/records", {
         id: crypto.randomUUID(),
+        date: format(new Date(), "yyyy-MM-dd"),
         ...values,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/records"] });
-      form.reset({ date: today, item: "", amount: undefined as any, paidBy: "胡", splitMode: "均分" });
+      form.reset({ item: "", amount: undefined as any, paidBy: "胡", splitMode: "均分" });
       toast({ title: "已記帳", description: "新增消費紀錄成功" });
     },
     onError: () => toast({ title: "錯誤", description: "新增失敗，請再試一次", variant: "destructive" }),
@@ -184,37 +180,22 @@ export default function Home() {
           {showForm && (
             <CardContent className="pt-0">
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {/* Date & Amount row */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="date" className="text-sm font-medium">消費日期</Label>
-                    <Input
-                      id="date"
-                      type="date"
-                      data-testid="input-date"
-                      {...form.register("date")}
-                      className="h-9"
-                    />
-                    {form.formState.errors.date && (
-                      <p className="text-xs text-destructive">{form.formState.errors.date.message}</p>
-                    )}
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="amount" className="text-sm font-medium">總金額 (NT$)</Label>
-                    <Input
-                      id="amount"
-                      type="number"
-                      placeholder="0"
-                      min={0}
-                      step={1}
-                      data-testid="input-amount"
-                      {...form.register("amount")}
-                      className="h-9"
-                    />
-                    {form.formState.errors.amount && (
-                      <p className="text-xs text-destructive">{form.formState.errors.amount.message}</p>
-                    )}
-                  </div>
+                {/* Amount */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="amount" className="text-sm font-medium">總金額 (NT$)</Label>
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="0"
+                    min={0}
+                    step={1}
+                    data-testid="input-amount"
+                    {...form.register("amount")}
+                    className="h-9"
+                  />
+                  {form.formState.errors.amount && (
+                    <p className="text-xs text-destructive">{form.formState.errors.amount.message}</p>
+                  )}
                 </div>
 
                 {/* Item */}
