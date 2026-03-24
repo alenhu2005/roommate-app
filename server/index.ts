@@ -75,9 +75,6 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   } else {
@@ -85,15 +82,10 @@ app.use((req, res, next) => {
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
+  // 這裡設定正確的 Port 與 0.0.0.0 確保 Render 能抓到
   const port = parseInt(process.env.PORT || "5001", 10);
   
-  // 這裡我們直接簡單化，不搞判斷式了，直接讓它在雲端能跑
   httpServer.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
   });
-  );
 })();
