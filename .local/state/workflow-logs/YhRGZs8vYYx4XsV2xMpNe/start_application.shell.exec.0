@@ -1,0 +1,182 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0K3:06:02 AM [express] serving on port 5000
+
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+3:06:09 AM [express] GET /api/records 200 in 3ms :: []
+3:06:13 AM [express] GET /api/records 304 in 2ms :: []
+3:10:11 AM [express] GET /api/records 200 in 1ms :: []
+3:10:42 AM [express] POST /api/records 201 in 1ms :: {"id":"844ff9d3-6214-4a7a-87e6-9259ed1ef9b5","date":"2026-03-24","item":"河粉","amount":170,"paidBy":"室友","splitMode":"只有我","createdAt":"2026-03-24T03:10:42.464Z"}
+3:10:42 AM [express] GET /api/records 200 in 0ms :: [{"id":"844ff9d3-6214-4a7a-87e6-9259ed1ef9b5","date":"2026-03-24","item":"河粉","amount":170,"paidBy":"室友","splitMode":"只有我","createdAt":"2026-03-24T03:10:42.464Z"}]
+3:10:58 AM [express] POST /api/records 201 in 0ms :: {"id":"2b77d610-1288-4fa4-ac83-36e7a40e072f","date":"2026-03-24","item":"衛生紙","amount":100,"paidBy":"我","splitMode":"均分","createdAt":"2026-03-24T03:10:58.612Z"}
+3:10:58 AM [express] GET /api/records 200 in 1ms :: [{"id":"2b77d610-1288-4fa4-ac83-36e7a40e072f","date":"2026-03-24","item":"衛生紙","amount":100,"paidBy":"我","splitMode":"均分","createdAt":"2026-03-24T03:10:58.612Z"},{"id":"844ff9d3-6214-4a7a-87e6-9259ed1ef9b5","date":"2026-03-24","item":"河粉","amount":170,"paidBy":"室友","splitMode":"只有我","createdAt":"2026-03-24T03:10:42.464Z"}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:15:40 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:17:32 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:17:42 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x3)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:17:49 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x4)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:17:56 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x5)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:18:08 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x6)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m3:18:17 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css[22m [33m(x7)[39m

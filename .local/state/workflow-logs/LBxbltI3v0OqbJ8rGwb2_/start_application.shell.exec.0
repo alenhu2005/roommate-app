@@ -1,0 +1,16 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0K3:29:20 AM [express] serving on port 5000
+
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+3:29:25 AM [express] GET /api/records 304 in 2ms :: []
+3:29:41 AM [express] GET /api/records 200 in 0ms :: []
+3:29:51 AM [express] GET /api/trips 200 in 0ms :: []
+3:30:33 AM [express] GET /api/records 304 in 1ms :: []
+3:30:38 AM [express] GET /api/trips 200 in 0ms :: []
+3:30:53 AM [express] POST /api/trips 201 in 2ms :: {"id":"31222351-b170-4e0a-b7a1-fd3046434027","name":"恩","members":["胡明皓","奧"],"createdAt":"2026-03-24T03:30:53.462Z"}
+3:30:53 AM [express] GET /api/trips/31222351-b170-4e0a-b7a1-fd3046434027/expenses 200 in 1ms :: []
+3:30:53 AM [express] GET /api/trips 200 in 1ms :: [{"id":"31222351-b170-4e0a-b7a1-fd3046434027","name":"恩","members":["胡明皓","奧"],"createdAt":"2026-03-24T03:30:53.462Z"}]
+3:30:53 AM [express] GET /api/trips/31222351-b170-4e0a-b7a1-fd3046434027 200 in 1ms :: {"id":"31222351-b170-4e0a-b7a1-fd3046434027","name":"恩","members":["胡明皓","奧"],"createdAt":"2026-03-24T03:30:53.462Z"}

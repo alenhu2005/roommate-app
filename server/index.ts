@@ -89,12 +89,12 @@ app.use((req, res, next) => {
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || "5000", 10);
+  const port = parseInt(process.env.PORT || "5001", 10); // 把 5000 改成 5001 避開 Mac 系統預設
   httpServer.listen(
     {
       port,
-      host: "0.0.0.0",
-      reusePort: true,
+      host: "127.0.0.1", // 把 0.0.0.0 改成 Mac 看得懂的本機位置
+      // 把會引發錯誤的 reusePort: true 刪掉了！
     },
     () => {
       log(`serving on port ${port}`);
