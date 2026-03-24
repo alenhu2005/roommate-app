@@ -44,8 +44,8 @@ const formSchema = z.object({
   date: z.string().min(1, "請選擇日期"),
   item: z.string().min(1, "請填寫消費項目"),
   amount: z.coerce.number().positive("金額必須大於 0"),
-  paidBy: z.enum(["我", "室友"]),
-  splitMode: z.enum(["均分", "只有我", "只有室友"]),
+  paidBy: z.enum(["胡", "詹"]),
+  splitMode: z.enum(["均分", "只有胡", "只有詹"]),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -58,14 +58,14 @@ function computeBalance(records: Record[]): number {
     if (r.splitMode === "均分") {
       shareMe = r.amount / 2;
       shareRoommate = r.amount / 2;
-    } else if (r.splitMode === "只有我") {
+    } else if (r.splitMode === "只有胡") {
       shareMe = r.amount;
       shareRoommate = 0;
     } else {
       shareMe = 0;
       shareRoommate = r.amount;
     }
-    if (r.paidBy === "我") {
+    if (r.paidBy === "胡") {
       net += shareRoommate;
     } else {
       net -= shareMe;
@@ -76,8 +76,8 @@ function computeBalance(records: Record[]): number {
 
 function splitLabel(mode: string) {
   if (mode === "均分") return "各付一半";
-  if (mode === "只有我") return "我全付";
-  return "室友全付";
+  if (mode === "只有胡") return "胡全付";
+  return "詹全付";
 }
 
 export default function Home() {
@@ -92,7 +92,7 @@ export default function Home() {
       date: today,
       item: "",
       amount: undefined as any,
-      paidBy: "我",
+      paidBy: "胡",
       splitMode: "均分",
     },
   });
@@ -109,7 +109,7 @@ export default function Home() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/records"] });
-      form.reset({ date: today, item: "", amount: undefined as any, paidBy: "我", splitMode: "均分" });
+      form.reset({ date: today, item: "", amount: undefined as any, paidBy: "胡", splitMode: "均分" });
       toast({ title: "已記帳", description: "新增消費紀錄成功" });
     },
     onError: () => toast({ title: "錯誤", description: "新增失敗，請再試一次", variant: "destructive" }),
@@ -237,7 +237,7 @@ export default function Home() {
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">誰先付錢？</Label>
                   <div className="grid grid-cols-2 gap-2">
-                    {(["我", "室友"] as const).map((option) => (
+                    {(["胡", "詹"] as const).map((option) => (
                       <button
                         key={option}
                         type="button"
@@ -251,7 +251,7 @@ export default function Home() {
                           }
                         `}
                       >
-                        {option === "我" ? "我付的" : "室友付的"}
+                        {option === "胡" ? "胡付的" : "詹付的"}
                       </button>
                     ))}
                   </div>
@@ -261,7 +261,7 @@ export default function Home() {
                 <div className="space-y-1.5">
                   <Label className="text-sm font-medium">怎麼分攤？</Label>
                   <div className="grid grid-cols-3 gap-2">
-                    {(["均分", "只有我", "只有室友"] as const).map((option) => (
+                    {(["均分", "只有胡", "只有詹"] as const).map((option) => (
                       <button
                         key={option}
                         type="button"
@@ -275,7 +275,7 @@ export default function Home() {
                           }
                         `}
                       >
-                        {option === "均分" ? "各付一半" : option === "只有我" ? "只算我的" : "只算室友"}
+                        {option === "均分" ? "各付一半" : option === "只有胡" ? "只算胡的" : "只算詹的"}
                       </button>
                     ))}
                   </div>
@@ -411,7 +411,7 @@ function BalanceCard({ balance, isLoading, recordCount }: { balance: number; isL
             <div>
               <p className="text-sm text-muted-foreground font-medium">目前結算</p>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xs text-muted-foreground">室友欠我</span>
+                <span className="text-xs text-muted-foreground">詹欠胡</span>
                 <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
                   NT$ {balance.toFixed(0)}
                 </span>
@@ -427,7 +427,7 @@ function BalanceCard({ balance, isLoading, recordCount }: { balance: number; isL
             <div>
               <p className="text-sm text-muted-foreground font-medium">目前結算</p>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xs text-muted-foreground">我欠室友</span>
+                <span className="text-xs text-muted-foreground">胡欠詹</span>
                 <span className="text-3xl font-bold text-rose-600 dark:text-rose-400">
                   NT$ {Math.abs(balance).toFixed(0)}
                 </span>
@@ -450,7 +450,7 @@ function RecordItem({
   onDelete: () => void;
   isDeleting: boolean;
 }) {
-  const isIPaid = record.paidBy === "我";
+  const isHu = record.paidBy === "胡";
 
   return (
     <Card
@@ -462,12 +462,12 @@ function RecordItem({
           {/* Paid-by indicator */}
           <div
             className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${
-              isIPaid
+              isHu
                 ? "bg-primary/10 text-primary"
                 : "bg-accent text-accent-foreground"
             }`}
           >
-            {isIPaid ? "我" : "友"}
+            {isHu ? "胡" : "詹"}
           </div>
 
           {/* Details */}
